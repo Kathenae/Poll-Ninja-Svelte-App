@@ -13,12 +13,12 @@ the development server
 - App
   - Header
   - Tabs
-  = PollList
-    = PollDetail
+  - PollList
+    - PollDetail
   - PollForm
   - Footer
-  = Button
-  = Card
+  - Button
+  - Card
 
 # Special Thanks
  Specials thanks go to [The Net Ninja](https://www.youtube.com/c/TheNetNinja) for making the [Tutorial Series](https://www.youtube.com/watch?v=zojEMeQGGHs&list=PL4cUxeGkcC9hlbrVO_2QFVqVPhlZmz7tO) on youtube that helped to create this app!
