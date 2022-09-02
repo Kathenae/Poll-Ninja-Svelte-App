@@ -3,13 +3,15 @@
   import Button from "../shared/Button.svelte";
   import PollStore from "../stores/PollStore";
   import {slide, fade} from "svelte/transition";
+  import {db} from '../Firebase';
+  import {addDoc, collection, doc } from "firebase/firestore";
 
   let dispach = createEventDispatcher()
   let fields = {question: '', answerA: '', answerB: ''};
   let errors = {question: '', answerA: '', answerB: ''};
   let valid = true;
 
-  const submitHandler = () => {
+  async function submitHandler(){
     valid = true;
     errors.question = '';
     errors.answerA = '';
@@ -34,11 +36,8 @@
     } 
 
     if(valid){
-      let poll = {...fields, votesA : 0, votesB: 0, id: Math.random() * 100}
-      // Save poll to store
-      PollStore.update(currentPolls => {
-        return [poll, ...currentPolls];
-      })
+      let pollData = {...fields, votesA : 0, votesB: 0}
+      await addDoc(collection(db, 'polls'), pollData);
       dispach('add');
     }
 

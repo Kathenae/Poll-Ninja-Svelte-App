@@ -3,6 +3,8 @@
   import Card from "../shared/Card.svelte";
   import PollStore from "../stores/PollStore";
   import {tweened} from 'svelte/motion';
+  import {db} from '../Firebase';
+  import {setDoc, doc } from "firebase/firestore";
   export let poll;
   
   $: totalVotes = poll.votesA + poll.votesB;
@@ -14,22 +16,21 @@
   
 
 
-  const handleVote = (option, id) => {
+  async function handleVote(option, id){
 
-    PollStore.update(polls => {
-      let copiedPolls = [...polls];
-      let votedPoll = copiedPolls.find(p => p.id === id);    
+    let votedPoll = {...poll};
 
-      if(option === 'a'){
-        votedPoll.votesA++;
-      }
+    if(option === 'a'){
+      votedPoll.votesA++;
+    }
 
-      if(option === 'b'){
-        votedPoll.votesB++;
-      }
+    if(option === 'b'){
+      votedPoll.votesB++;
+    }
 
-      return copiedPolls;
-    })
+    poll = votedPoll;
+    let pollRef = doc(db, 'polls', id);
+    setDoc(pollRef, poll);
   }
 
   const handleDelete = (id) => {
