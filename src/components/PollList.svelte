@@ -24,7 +24,7 @@
 <div class="poll-list">
   {#each polls as poll(poll.id)}
     <div in:fade out:scale|local animate:flip={{duration: 500}}>
-      <PollDetails {poll} on:vote/>
+      <PollDetails {poll} on:vote on:delete={(id) => { loadPolls() }}/>
     </div>
   {/each}
 </div>

@@ -1,11 +1,13 @@
 <script>
   import Button from "../shared/Button.svelte";
   import Card from "../shared/Card.svelte";
-  import PollStore from "../stores/PollStore";
+  import { createEventDispatcher } from "svelte";
   import {tweened} from 'svelte/motion';
   import {db} from '../Firebase';
-  import {setDoc, doc } from "firebase/firestore";
+  import {setDoc, doc, deleteDoc} from "firebase/firestore";
   export let poll;
+  
+  let dispach = createEventDispatcher();
   
   $: totalVotes = poll.votesA + poll.votesB;
   let percentA = tweened(0);
@@ -33,10 +35,9 @@
     setDoc(pollRef, poll);
   }
 
-  const handleDelete = (id) => {
-    PollStore.update(polls => {
-      return polls.filter(poll => poll.id != id);
-    });
+  async function handleDelete(id){
+    await deleteDoc(doc(db, 'polls', id))
+    dispach('delete', id)
   }
 </script>
 
