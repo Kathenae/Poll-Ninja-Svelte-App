@@ -20,9 +20,9 @@ This is a simple poll app built using svelte following the tutorial by The Net N
   - Card
 
 ## Firestore Integration
-  I've taken some time to integrate the app with Firebases firestore database, on the `src/Firebase.js` file, where i created a new firebase app instance giving it my firecloud's project configuration object and then created and exported the firestore database connection instance created by using the getFirestore function and giving it the app instance created earlier!
+  I've taken some time to integrate the app with Firebase's Firestore database. In the `src/Firebase.js` file, i created a new firebase app instance giving it my firecloud's project configuration object and then created and exported the firestore database connection instance created by using the getFirestore function and giving it the app instance created earlier!
 
-  Then on made changes on `PollsList`, `PollForm` and `PollDetails` components so that they instead make direct calls to the Firestore database to retrieve, create or delete entries on the `polls` collection
+  Then made some changes on `PollsList`, `PollForm` and `PollDetails` components so that they instead make direct calls to the Firestore database to retrieve, create or delete entries on the `polls` collection
 
 # Special Thanks
  Specials thanks go to [The Net Ninja](https://www.youtube.com/c/TheNetNinja) for making the [Tutorial Series](https://www.youtube.com/watch?v=zojEMeQGGHs&list=PL4cUxeGkcC9hlbrVO_2QFVqVPhlZmz7tO) on youtube that helped to create this app!
